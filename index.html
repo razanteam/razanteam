@@ -3,350 +3,391 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Razan Games | Level Up Your Experience</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    <title>Razan Games Studio | Mobile Game & App Development</title>
+    <meta name="title" content="Razan Games Studio | Mobile Game & App Development">
+    <meta name="description" content="Razan Games Studio with over 1 million active users - Creating mobile games, gaming apps, and DNS services. Download Donut Stack and RDNS Gaming.">
+    <meta name="keywords" content="Game Studio, Mobile Game Development, Razan Games, RDNS Gaming, Donut Stack, Download Games, Ping Reducer, Gaming DNS, Isaac Alizadeh">
+    <meta name="author" content="Isaac Alizadeh - Razan Games Studio">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="language" content="English">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://razangames.com/">
+    <meta property="og:title" content="Razan Games Studio | Official Website">
+    <meta property="og:description" content="Creating the future of mobile gaming with over 1 million active users.">
+    <meta property="og:image" content="https://razangames.com/LogoTxt.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
     <style>
         :root {
-            --primary: #00f2ff;
-            --secondary: #7000ff;
-            --accent: #ff007a;
-            --bg: #050510;
-            --card-bg: rgba(15, 15, 35, 0.8);
+            --primary: #00d2ff;
+            --secondary: #ff00aa;
+            --dark: #0a0a1f;
+            --light: #f0f8ff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --gradient: linear-gradient(45deg, var(--primary), var(--secondary));
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background-color: var(--bg);
-            color: #fff;
             font-family: 'Orbitron', sans-serif;
+            background: var(--dark);
+            color: white;
             overflow-x: hidden;
-            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
         }
 
-        .lang-fa { font-family: 'Vazirmatn', sans-serif !important; direction: rtl; }
-
-        /* Animated Grid Background */
-        .grid-bg {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -2;
-            transform: perspective(500px) rotateX(60deg);
-            transform-origin: top;
-            animation: grid-move 10s linear infinite;
-        }
-
-        @keyframes grid-move {
-            from { background-position: 0 0; }
-            to { background-position: 0 50px; }
-        }
+        /* RTL/Persian Support */
+        .lang-fa { font-family: 'Vazirmatn', sans-serif !important; direction: rtl; text-align: right; }
 
         #particles-js {
             position: fixed;
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
             z-index: -1;
         }
 
-        /* Neon Glow Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { 
-            background: linear-gradient(var(--primary), var(--secondary));
-            border-radius: 10px;
-        }
-
-        /* Language Switcher */
         .lang-switch {
-            position: fixed;
-            top: 20px; right: 20px;
+            position: absolute;
+            top: 25px;
+            right: 25px;
             z-index: 1000;
         }
 
         .lang-switch button {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 8px 20px;
-            border-radius: 4px;
-            font-family: inherit;
+            background: var(--gradient);
+            border: none;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
             font-weight: bold;
-            transition: 0.3s;
-            backdrop-filter: blur(10px);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0,210,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .lang-switch button:hover {
-            background: var(--primary);
-            color: var(--bg);
-            box-shadow: 0 0 20px var(--primary);
+            transform: scale(1.1);
+            box-shadow: 0 0 25px var(--primary);
         }
 
-        /* Header / Hero */
         header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 100px 20px 60px;
+            background: radial-gradient(circle at center, rgba(0,210,255,0.15) 0%, transparent 70%);
         }
 
-        .hero-logo {
-            width: 150px;
-            filter: drop-shadow(0 0 20px var(--primary));
-            margin-bottom: 20px;
-            animation: float 4s ease-in-out infinite;
+        .logo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 50px rgba(0,210,255,0.4);
+            margin-bottom: 25px;
+            animation: pulse 3s infinite alternate;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        @keyframes pulse {
+            from { transform: scale(1); box-shadow: 0 0 30px rgba(0,210,255,0.4); }
+            to { transform: scale(1.05); box-shadow: 0 0 60px rgba(255,0,170,0.6); }
         }
 
-        .glitch-text {
-            font-size: clamp(2rem, 8vw, 5rem);
-            text-transform: uppercase;
-            position: relative;
-            text-shadow: 0.05em 0 0 var(--accent), -0.05em -0.025em 0 var(--primary);
-            animation: glitch 1s infinite;
-        }
-
-        @keyframes glitch {
-            0% { text-shadow: 0.05em 0 0 var(--accent), -0.05em -0.025em 0 var(--primary); }
-            15% { text-shadow: -0.05em -0.025em 0 var(--accent), 0.025em 0.025em 0 var(--primary); }
-            /* Add more steps if needed */
-        }
-
-        /* Project Cards */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px;
-        }
-
-        .section-header {
-            font-size: 2rem;
-            margin-bottom: 50px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-transform: uppercase;
-        }
-
-        .section-header::after {
-            content: '';
-            height: 2px;
-            flex-grow: 1;
-            background: linear-gradient(90deg, var(--primary), transparent);
-        }
-
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .game-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 30px;
-            position: relative;
-            transition: 0.4s;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .game-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(0,242,255,0.1), transparent);
-            transform: translateX(-100%);
-            transition: 0.6s;
-        }
-
-        .game-card:hover::before { transform: translateX(100%); }
-
-        .game-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.2);
-        }
-
-        .game-card img {
-            width: 120px;
-            height: 120px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
-        }
-
-        .badge {
-            background: var(--secondary);
-            font-size: 0.7rem;
-            padding: 2px 10px;
-            border-radius: 20px;
+        h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #fff, var(--primary), var(--secondary), #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shine 5s linear infinite;
             margin-bottom: 10px;
         }
 
-        .action-btn {
-            margin-top: auto;
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 10px 25px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.8rem;
-            transition: 0.3s;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        @keyframes shine {
+            to { background-position: 200% center; }
         }
 
-        .action-btn:hover {
-            background: var(--primary);
-            color: var(--bg);
-            box-shadow: 0 0 15px var(--primary);
+        #studioTagline {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            margin-top: 10px;
         }
 
-        /* Footer / Contact */
-        .footer-terminal {
-            background: rgba(0,0,0,0.8);
-            border-top: 1px solid var(--primary);
-            padding: 40px 20px;
-            font-family: monospace;
+        .section-title {
             text-align: center;
+            font-size: 3rem;
+            margin-bottom: 50px;
+            color: white;
+            text-transform: uppercase;
         }
 
-        .terminal-text {
-            color: #0f0;
-            margin-bottom: 20px;
+        .team-section, .projects-section, .contact-section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
+        .team-grid, .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .member, .project {
+            background: var(--glass);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member:hover, .project:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .project img {
+            width: 160px;
+            height: 160px;
+            border-radius: 35px;
+            margin-bottom: 25px;
+            transition: transform 0.5s ease;
+        }
+
+        .project:hover img {
+            transform: rotate(8deg) scale(1.1);
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 14px 35px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.4s;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: white;
+            opacity: 0;
+            z-index: -1;
+            transition: 0.4s;
+        }
+
+        .btn:hover {
+            color: var(--dark);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px var(--primary);
+        }
+
+        .btn:hover::before { opacity: 1; }
+
+        .contact-section {
+            text-align: center;
+            background: linear-gradient(to bottom, transparent, rgba(0,210,255,0.05));
+            border-radius: 40px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
-            header { height: auto; padding: 100px 20px; }
-            .hero-logo { width: 100px; }
-            .glitch-text { font-size: 2.5rem; }
+            h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
         }
     </style>
 </head>
 <body class="lang-en">
 
-<div class="grid-bg"></div>
 <div id="particles-js"></div>
 
 <div class="lang-switch">
     <button id="langBtn" onclick="toggleLanguage()">فارسی</button>
 </div>
 
-<header data-aos="zoom-in">
-    <img src="LogoTxt.png" alt="Logo" class="hero-logo">
-    <h1 class="glitch-text" id="mainTitle">Razan Games</h1>
-    <p id="heroSub">SYSTEM STATUS: ONLINE | LEVEL: ELITE</p>
+<header data-aos="zoom-out" data-aos-duration="1500">
+    <img src="LogoTxt.png" alt="Razan Games Studio Logo" class="logo" id="studioLogo">
+    <h1 id="studioName">RAZAN GAMES</h1>
+    <p id="studioTagline">CRAFTING DIGITAL ADVENTURES</p>
 </header>
 
-<div class="container">
-    <section id="projects">
-        <div class="section-header" data-aos="fade-right">
-            <span id="projTitle">Current Missions</span>
+<main>
+    <section class="team-section" id="team">
+        <h2 id="teamTitle" class="section-title" data-aos="fade-down">The Architect</h2>
+        <div class="team-grid">
+            <article class="member" data-aos="fade-up" data-aos-delay="200">
+                <img src="isaac.jpg" alt="Isaac Alizadeh" style="width:140px; border-radius:50%; border: 3px solid var(--primary); margin-bottom: 20px;">
+                <h3 id="memberName">Isaac Alizadeh</h3>
+                <p id="memberRole">Founder & Lead Developer</p>
+            </article>
         </div>
-        
-        <div class="game-grid">
-            <article class="game-card" data-aos="flip-up">
-                <div class="badge">UTILITY</div>
-                <img src="rdns.png" alt="RDNS">
+    </section>
+
+    <section class="projects-section" id="projects">
+        <h2 id="projectsTitle" class="section-title" data-aos="fade-down">Our Creations</h2>
+        <div class="projects-grid">
+            <article class="project" data-aos="fade-right" data-aos-delay="100">
+                <img src="rdns.png" alt="RDNS Gaming">
                 <h3>RDNS Gaming</h3>
-                <p id="rdnsDesc" style="font-size: 0.9rem; opacity: 0.8; margin: 15px 0;">Optimize your network. Lower ping, better performance.</p>
-                <a href="https://myket.ir/app/come.razan.rdns" target="_blank" class="action-btn">EXECUTE</a>
+                <p id="rdnsDesc">The ultimate DNS solution for gamers. Low latency, zero lag. Over 1 million users trust us.</p>
+                <a href="https://myket.ir/app/come.razan.rdns" target="_blank" class="btn" id="rdnsBtn">Download Now</a>
             </article>
 
-            <article class="game-card" data-aos="flip-up" data-aos-delay="200">
-                <div class="badge">GAME</div>
+            <article class="project" data-aos="fade-left" data-aos-delay="300">
                 <img src="mICON.png" alt="Donut Stack">
                 <h3>Donut Stack</h3>
-                <p id="donutDesc" style="font-size: 0.9rem; opacity: 0.8; margin: 15px 0;">Addictive sorting puzzles. Get it on Google Play Store.</p>
-                <a href="https://play.google.com/store/apps/details?id=com.razan.donutstack" target="_blank" class="action-btn">PLAY NOW</a>
+                <p id="donutDesc">Satisfying color-sorting puzzle. Easy to play, hard to master. Join the fun!</p>
+                <a href="https://play.google.com/store/apps/details?id=com.razan.donutstack" target="_blank" class="btn" id="donutBtn">Get it on Google Play</a>
             </article>
         </div>
     </section>
 
-    <section id="dev-info" style="margin-top: 100px;">
-        <div class="section-header" data-aos="fade-right">
-            <span id="devTitle">Developer Profile</span>
-        </div>
-        <div class="game-card" style="flex-direction: row; text-align: left; gap: 30px; justify-content: flex-start;">
-            <img src="isaac.jpg" style="border-radius: 50%; width: 100px; height: 100px;">
-            <div>
-                <h3 id="devName">Isaac Alizadeh</h3>
-                <p id="devRole" style="color: var(--primary);">Lead Game Architect / Full-Stack Developer</p>
-            </div>
+    <section class="contact-section" id="contact" data-aos="zoom-in">
+        <h2 id="contactTitle" class="section-title">Join Us</h2>
+        <p id="contactText">Have a vision? Let's bring it to life together.</p>
+        <div style="margin-top: 30px;">
+            <a href="https://t.me/eshagh_alizade" target="_blank" class="btn">Message on Telegram</a>
         </div>
     </section>
-</div>
+</main>
 
-<footer class="footer-terminal">
-    <p class="terminal-text">> CONTACT INITIALIZED...</p>
-    <a href="https://t.me/eshagh_alizade" style="color: var(--primary); text-decoration: none;">[ TELEGRAM ]</a>
-    <p style="margin-top: 30px; font-size: 0.7rem; opacity: 0.5;">© 2026 RAZAN_GAMES_CORE. ALL RIGHTS RESERVED.</p>
+<footer>
+    <p id="footerText">© 2026 RAZAN GAMES STUDIO - ALL RIGHTS RESERVED</p>
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    AOS.init({ duration: 800, once: true });
+    // Initialize AOS with smoother settings
+    AOS.init({
+        duration: 1000,
+        once: true,
+        easing: 'ease-out-back',
+        anchorPlacement: 'top-bottom'
+    });
 
     let isEnglish = true;
+
     function toggleLanguage() {
         isEnglish = !isEnglish;
-        const b = document.body;
-        
-        if(isEnglish) {
-            b.classList.remove('lang-fa');
-            document.getElementById('langBtn').innerText = "فارسی";
-            document.getElementById('mainTitle').innerText = "Razan Games";
-            document.getElementById('heroSub').innerText = "SYSTEM STATUS: ONLINE | LEVEL: ELITE";
-            document.getElementById('projTitle').innerText = "Current Missions";
-            document.getElementById('devTitle').innerText = "Developer Profile";
-            document.getElementById('rdnsDesc').innerText = "Optimize your network. Lower ping, better performance.";
-            document.getElementById('donutDesc').innerText = "Addictive sorting puzzles. Get it on Google Play Store.";
-            document.getElementById('devName').innerText = "Isaac Alizadeh";
-            document.getElementById('devRole').innerText = "Lead Game Architect / Full-Stack Developer";
-        } else {
-            b.classList.add('lang-fa');
-            document.getElementById('langBtn').innerText = "English";
-            document.getElementById('mainTitle').innerText = "رازان گیمز";
-            document.getElementById('heroSub').innerText = "وضعیت سیستم: آنلاین | سطح: حرفه‌ای";
-            document.getElementById('projTitle').innerText = "ماموریت‌های فعلی";
-            document.getElementById('devTitle').innerText = "پروفایل توسعه‌دهنده";
-            document.getElementById('rdnsDesc').innerText = "بهینه‌سازی شبکه، کاهش پینگ و افزایش کارایی بازی.";
-            document.getElementById('donutDesc').innerText = "پازل‌های اعتیادآور مرتب‌سازی دونات در گوگل‌پلی.";
-            document.getElementById('devName').innerText = "اسحاق علی‌زاده";
-            document.getElementById('devRole').innerText = "معمار ارشد بازی / توسعه‌دهنده فول استک";
-        }
+        const body = document.body;
+        const html = document.documentElement;
+
+        // Reset AOS animations to trigger again
         AOS.refresh();
+
+        if (isEnglish) {
+            html.lang = 'en';
+            html.dir = 'ltr';
+            body.className = 'lang-en';
+            
+            document.getElementById('langBtn').innerText = "فارسی";
+            document.getElementById('studioName').innerText = "RAZAN GAMES";
+            document.getElementById('studioTagline').innerText = "CRAFTING DIGITAL ADVENTURES";
+            document.getElementById('teamTitle').innerText = "The Architect";
+            document.getElementById('memberName').innerText = "Isaac Alizadeh";
+            document.getElementById('memberRole').innerText = "Founder & Lead Developer";
+            document.getElementById('projectsTitle').innerText = "Our Creations";
+            document.getElementById('rdnsDesc').innerText = "The ultimate DNS solution for gamers. Low latency, zero lag. Over 1 million users trust us.";
+            document.getElementById('rdnsBtn').innerText = "Download Now";
+            document.getElementById('donutDesc').innerText = "Satisfying color-sorting puzzle. Easy to play, hard to master. Join the fun!";
+            document.getElementById('donutBtn').innerText = "Get it on Google Play";
+            document.getElementById('contactTitle').innerText = "Join Us";
+            document.getElementById('contactText').innerText = "Have a vision? Let's bring it to life together.";
+            document.getElementById('footerText').innerText = "© 2026 RAZAN GAMES STUDIO - ALL RIGHTS RESERVED";
+        } else {
+            html.lang = 'fa';
+            html.dir = 'rtl';
+            body.className = 'lang-fa';
+
+            document.getElementById('langBtn').innerText = "English";
+            document.getElementById('studioName').innerText = "رازان گیمز";
+            document.getElementById('studioTagline').innerText = "خالق ماجراجویی‌های دیجیتال شما";
+            document.getElementById('teamTitle').innerText = "تیم ما";
+            document.getElementById('memberName').innerText = "اسحاق علی‌زاده";
+            document.getElementById('memberRole').innerText = "مؤسس و برنامه‌نویس ارشد";
+            document.getElementById('projectsTitle').innerText = "ساخته‌های ما";
+            document.getElementById('rdnsDesc').innerText = "بهترین راهکار DNS برای گیمرها. کاهش پینگ و رفع لگ. مورد اعتماد ۱ میلیون کاربر.";
+            document.getElementById('rdnsBtn').innerText = "دانلود رایگان";
+            document.getElementById('donutDesc').innerText = "بازی پازل مرتب‌سازی رنگ‌ها. ساده اما چالش‌برانگیز. به ما بپیوندید!";
+            document.getElementById('donutBtn').innerText = "دریافت از گوگل پلی";
+            document.getElementById('contactTitle').innerText = "ارتباط با ما";
+            document.getElementById('contactText').innerText = "ایده‌ای دارید؟ بیایید با هم آن را بسازیم.";
+            document.getElementById('footerText').innerText = "© ۲۰۲۶ استودیو رازان گیمز - تمامی حقوق محفوظ است";
+        }
     }
 
+    // Particles JS High Performance Config
     particlesJS("particles-js", {
         "particles": {
-            "number": { "value": 40 },
-            "color": { "value": "#00f2ff" },
+            "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": ["#00d2ff", "#ff00aa"] },
             "shape": { "type": "circle" },
-            "opacity": { "value": 0.3 },
-            "size": { "value": 2 },
-            "line_linked": { "enable": true, "distance": 150, "color": "#00f2ff", "opacity": 0.2, "width": 1 },
-            "move": { "enable": true, "speed": 1 }
-        }
+            "opacity": { "value": 0.5, "random": true },
+            "size": { "value": 3, "random": true },
+            "line_linked": { 
+                "enable": true, 
+                "distance": 150, 
+                "color": "#00d2ff", 
+                "opacity": 0.2, 
+                "width": 1 
+            },
+            "move": { 
+                "enable": true, 
+                "speed": 1.5, 
+                "direction": "none", 
+                "random": true, 
+                "out_mode": "out" 
+            }
+        },
+        "interactivity": {
+            "events": {
+                "onhover": { "enable": true, "mode": "grab" },
+                "onclick": { "enable": true, "mode": "push" }
+            },
+            "modes": {
+                "grab": { "distance": 200, "line_linked": { "opacity": 0.5 } }
+            }
+        },
+        "retina_detect": true
     });
 </script>
 
