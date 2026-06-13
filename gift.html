@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>قرعه‌کشی هفتگی اشتراک پرمیوم RDNS</title>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+        :root { --bg-color: #0f1319; --card-bg: rgba(26, 32, 44, 0.85); --primary: #ffd43b; --google-play: #2ed573; --text-main: #ffffff; --text-muted: #a0aec0; --success: #2ed573; --error: #ff4757; }
+        html, body { height: 100%; margin: 0; padding: 0; overflow: hidden; background-color: var(--bg-color); }
+        body { font-family: 'Vazirmatn', Tahoma, sans-serif; background: radial-gradient(circle at top, #1a2333 0%, #0f1319 100%); color: var(--text-main); display: flex; justify-content: center; align-items: center; box-sizing: border-box; padding: 10px; }
+        .card { background: var(--card-bg); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 15px; max-width: 380px; width: 100%; max-height: 98vh; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); text-align: center; box-sizing: border-box; overflow: hidden;}
+        .gift-icon { font-size: 36px; margin-bottom: 2px; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        h2 { margin: 0 0 2px 0; font-size: 19px; color: var(--primary); font-weight: 700; }
+        .feature-badge { background: rgba(255, 212, 59, 0.1); color: var(--primary); border: 1px solid rgba(255, 212, 59, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 11px; display: inline-block; margin-bottom: 10px; font-weight: bold; }
+        .info-panel { font-size: 12.5px; color: #e2e8f0; line-height: 1.6; background: rgba(0, 0, 0, 0.25); padding: 12px; border-radius: 14px; margin-bottom: 12px; text-align: right; border-right: 3px solid var(--primary); box-sizing: border-box; }
+        .info-panel b { color: var(--primary); }
+        .info-panel p { margin: 0 0 6px 0; text-align: justify; }
+        .steps-list { margin-top: 6px; padding-right: 5px; font-size: 12px;}
+        .step-row { display: flex; gap: 4px; margin-bottom: 3px; }
+        .step-num { color: var(--primary); font-weight: bold; }
+        .play-btn { background-color: transparent; color: var(--google-play); border: 1.5px solid var(--google-play); padding: 9px; width: 100%; border-radius: 10px; font-family: inherit; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; margin-bottom: 12px; box-sizing: border-box; }
+        .form-group { margin-bottom: 10px; text-align: right; }
+        label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 4px; padding-right: 2px; font-weight: bold;}
+        input[type="email"] { width: 100%; padding: 11px; border-radius: 10px; border: 1px solid #3a4256; background: #1e2640; color: #fff; font-family: inherit; font-size: 14px; box-sizing: border-box; text-align: left; direction: ltr; }
+        input[type="email"]:focus { outline: none; border-color: var(--primary); }
+        input[type="file"] { width: 100%; padding: 9px; background: rgba(255, 255, 255, 0.04); border: 1px dashed #4a5568; border-radius: 10px; color: #fff; box-sizing: border-box; font-size: 12px; font-family: inherit; cursor: pointer; }
+        .submit-btn { background: var(--primary); color: #0f1319; font-family: inherit; font-weight: 700; font-size: 14.5px; padding: 12px; width: 100%; border: none; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 12px rgba(255, 212, 59, 0.2); }
+        .submit-btn:disabled { background: #4a5568; color: #718096; box-shadow: none; cursor: not-allowed; }
+        #loading { display: none; color: var(--primary); font-size: 12.5px; font-weight: bold; margin-top: 10px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+        #result { margin-top: 10px; font-size: 13px; font-weight: bold; border-radius: 10px; padding: 10px; display: none; line-height: 1.5; }
+        .success { background: rgba(46, 213, 115, 0.15); color: var(--success); border: 1px solid rgba(46, 213, 115, 0.3); display: block !important; }
+        .error { background: rgba(255, 71, 87, 0.15); color: var(--error); border: 1px solid rgba(255, 71, 87, 0.3); display: block !important; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="gift-icon">🎁</div>
+    <h2>قرعه‌کشی بزرگ هفتگی</h2>
+    <div class="feature-badge">۳ برنده در هر هفته</div>
+
+    <div class="info-panel">
+        <p>با نصب بازی ما، برنده <b>اشتراک ۱ ماهه پرمیوم RDNS</b> (حذف تبلیغات) شوید. برندگان هفتگی خودکار فعال و ایمیل می‌شوند.</p>
+        <div class="steps-list">
+            <div class="step-row"><span class="step-num">۱.</span><span>نصب بازی از دکمه سبز زیر</span></div>
+            <div class="step-row"><span class="step-num">۲.</span><span>گرفتن اسکرین‌شات از صفحه گوگل‌پلی بازی</span></div>
+            <div class="step-row"><span class="step-num">۳.</span><span>ارسال ایمیل و عکس در فرم زیر</span></div>
+        </div>
+    </div>
+
+    <a href="https://play.google.com/store/apps/details?id=com.razan.donutstack&hl=en" target="_blank" class="play-btn">
+        دانلود بازی از گوگل‌پلی
+    </a>
+
+    <div class="form-group">
+        <label>آدرس ایمیل شما:</label>
+        <input type="email" id="emailInput" placeholder="example@email.com" required>
+    </div>
+
+    <div class="form-group">
+        <label>اسکرین‌شات گوگل‌پلی:</label>
+        <input type="file" id="imageInput" accept="image/*">
+    </div>
+    
+    <button class="submit-btn" id="submitBtn" onclick="processImage()">بررسی عکس و ثبت‌نام</button>
+
+    <div id="loading">⏳ در حال بررسی هوشمند اسکرین‌شات...</div>
+    <div id="result"></div>
+</div>
+
+<script>
+let originalBase64 = ""; // ذخیره عکس خام برای ارسال امن به سرور
+
+function processImage() {
+    const email = document.getElementById('emailInput').value.trim();
+    const imageInput = document.getElementById('imageInput').files[0];
+    const loading = document.getElementById('loading');
+    const result = document.getElementById('result');
+    const submitBtn = document.getElementById('submitBtn');
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('لطفاً ایمیل معتبر وارد کنید.'); return; }
+    if (!imageInput) { alert('لطفاً اسکرین‌شات را آپلود کنید.'); return; }
+
+    loading.style.display = 'block';
+    result.className = '';
+    result.innerHTML = '';
+    submitBtn.disabled = true;
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        originalBase64 = event.target.result; // ذخیره عکس اصلی
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const scale = 2;
+            canvas.width = img.width * scale;
+            canvas.height = img.height * scale;
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                const brightness = (0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2]);
+                if (brightness > 180) { data[i] = data[i+1] = data[i+2] = 0; } 
+                else { data[i] = data[i+1] = data[i+2] = 255; }
+            }
+            ctx.putImageData(imageData, 0, 0);
+            runOCR(canvas.toDataURL('image/jpeg', 1.0), email);
+        };
+        img.src = event.target.result;
+    };
+    reader.readAsDataURL(imageInput);
+}
+
+async function runOCR(processedImage, email) {
+    const loading = document.getElementById('loading');
+    const result = document.getElementById('result');
+    const submitBtn = document.getElementById('submitBtn');
+
+    try {
+        const worker = await Tesseract.createWorker('eng+fas');
+        await worker.setParameters({ tessedit_pageseg_mode: '11' });
+        const { data: { text } } = await worker.recognize(processedImage);
+        await worker.terminate();
+
+        const cleanText = text.toLowerCase().replace(/[\s\n\r\t\u200C]+/g, '');
+        const hasGameName = cleanText.includes('donut') && cleanText.includes('stack') && cleanText.includes('sorting');
+        const smartShortcutsFa = cleanText.includes('ویرایشبازخورد') || cleanText.includes('slaaliy');
+        const smartShortcutsEn = cleanText.includes('edityourfeedback') || cleanText.includes('yourprivatefeedback') || cleanText.includes('internaltester');
+        const hasUninstall = cleanText.includes('uninstall');
+        const hasPlay = cleanText.includes('play') || cleanText.includes('p1ay') || cleanText.includes('open');
+        
+        const isEnglishInstalled = hasGameName && (hasUninstall || hasPlay || smartShortcutsEn);
+        const hasPakhsh = cleanText.includes('پخش') || cleanText.includes('اجرا') || cleanText.includes('ladsa');
+        const hasHazf = cleanText.includes('حذف') || cleanText.includes('لغو') || cleanText.includes('حدف') || cleanText.includes('حدفدص');
+        const isPersianInstalled = hasGameName && ((hasPakhsh && hasHazf) || smartShortcutsFa);
+
+        if (isEnglishInstalled || isPersianInstalled) {
+            saveUserToDatabase(email, originalBase64, result);
+        } else {
+            result.className = 'error';
+            result.innerHTML = "❌ تایید نشد! مطمئن شوید عکس از صفحه بازی در گوگل‌پلی است و دکمه‌های آن مشخص است.";
+        }
+    } catch(err) {
+        result.className = 'error';
+        result.innerHTML = "⚠️ خطا در پردازش تصویر.";
+    } finally {
+        loading.style.display = 'none';
+        submitBtn.disabled = false;
+    }
+}
+
+function saveUserToDatabase(email, imageBase64, resultDiv) {
+    const _0x1 = ['http://', '87.24', '8.156', '.51', ':18', '013', '/api/', 'register'];
+    const _url = _0x1.join('');
+    
+    function _0xenc(_data) {
+        const _k = 'RDNS2026';
+        const _s = JSON.stringify(_data);
+        let _r = '';
+        for (let i = 0; i < _s.length; i++) { _r += String.fromCharCode(_s.charCodeAt(i) ^ _k.charCodeAt(i % _k.length)); }
+        return btoa(_r);
+    }
+
+    const _payload = _0xenc({ email: email, image: imageBase64, timestamp: Date.now() });
+
+    fetch(_url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ payload: _payload })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === 'success') {
+            resultDiv.className = 'success';
+            resultDiv.innerHTML = "✅ تایید شد! ایمیل شما با موفقیت در لیست قرعه‌کشی قرار گرفت.";
+        } else if (data.status === 'exists_email') {
+            resultDiv.className = 'success';
+            resultDiv.innerHTML = "✅ تایید شد! (ایمیل شما از قبل در لیست ثبت شده بود).";
+        } else if (data.status === 'exists_file') {
+            resultDiv.className = 'error';
+            resultDiv.innerHTML = "❌ خطای تقلب: این اسکرین‌شات تکراری است و قبلاً توسط شخص دیگری استفاده شده است!";
+        }
+    })
+    .catch(err => {
+        resultDiv.className = 'error';
+        resultDiv.innerHTML = "⚠️ خطا در ارتباط با سرور قرعه‌کشی.";
+    });
+}
+</script>
+</body>
+</html>
