@@ -286,12 +286,14 @@ body.en .stat-item:last-child { border-right: none; }
   display: block;
   line-height: 1;
   margin-bottom: 6px;
-  font-family: var(--mono);
+  font-family: var(--fa);
 }
+body.en .stat-num { font-family: var(--mono); }
 .stat-label {
   font-size: 0.8rem;
   color: var(--muted);
   letter-spacing: 0;
+  font-family: var(--fa);
 }
 body.en .stat-label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; }
 
@@ -536,11 +538,11 @@ body.en .footer-inner { font-family: var(--mono); font-size: 0.72rem; letter-spa
       <span class="stat-label" id="txt-stat-users">کاربر فعال</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num">۳</span>
+      <span class="stat-num" id="stat-apps">۳</span>
       <span class="stat-label" id="txt-stat-apps">اپلیکیشن منتشر شده</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num">۲۰۱۹</span>
+      <span class="stat-num" id="stat-year">۲۰۱۹</span>
       <span class="stat-label" id="txt-stat-year">سال تأسیس</span>
     </div>
   </div>
@@ -886,6 +888,10 @@ function applyLang(lang){
       ? '&copy; ۲۰۲۶ <span class="highlight">استودیو رازان گیمز</span> — تمامی حقوق محفوظ است'
       : '&copy; 2026 <span class="highlight">RAZAN GAMES STUDIO</span> — ALL RIGHTS RESERVED';
   }
+
+  // static stat numbers
+  document.getElementById('stat-apps').textContent = lang==='fa' ? '۳' : '3';
+  document.getElementById('stat-year').textContent = lang==='fa' ? '۲۰۱۹' : '2019';
 
   // stat counter restart
   statFired = false;
