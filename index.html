@@ -21,8 +21,8 @@
 
         :root {
             --bg:          #03030a;
-            --bg-card:     rgba(13, 13, 35, 0.55);
-            --bg-card-hover: rgba(20, 20, 50, 0.7);
+            --bg-card:     rgba(13, 13, 35, 0.35);
+            --bg-card-hover: rgba(20, 20, 50, 0.5);
             --glass-border: rgba(255, 255, 255, 0.12);
             --glass-glow:  rgba(0, 255, 209, 0.15);
             --cyan:        #00ffd1;
@@ -595,10 +595,49 @@
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
 
-        /* ── RESPONSIVE ── */
+        /* ── RESPONSIVE & MOBILE ANIMATIONS ── */
         @media (max-width: 768px) {
             section { padding: 80px 20px; }
             .hero { padding-top: 100px; }
+            
+            /* Glass visual tune for mobile performance */
+            .glass-card {
+                backdrop-filter: blur(14px) saturate(160%);
+                -webkit-backdrop-filter: blur(14px) saturate(160%);
+                border-color: rgba(255, 255, 255, 0.15);
+            }
+
+            /* Live ambient Shimmer sweep on cards */
+            .glass-card::after {
+                content: '';
+                position: absolute;
+                top: -50%; left: -50%;
+                width: 200%; height: 200%;
+                background: linear-gradient(
+                    45deg,
+                    transparent 45%,
+                    rgba(0, 255, 209, 0.08) 50%,
+                    transparent 55%
+                );
+                transform: rotate(30deg);
+                animation: shimmerSweep 6s infinite ease-in-out;
+                pointer-events: none;
+            }
+
+            /* Gentle dynamic float for app icons */
+            .proj-icon {
+                animation: mobileIconFloat 4s infinite ease-in-out alternate;
+            }
+            .projects-grid .glass-card:nth-child(2) .proj-icon { animation-delay: -1.3s; }
+            .projects-grid .glass-card:nth-child(3) .proj-icon { animation-delay: -2.6s; }
+
+            /* Touch active feedback for mobile buttons & cards */
+            .glass-btn:active, .glass-card:active {
+                transform: scale(0.97) !important;
+                border-color: var(--cyan) !important;
+                box-shadow: 0 0 20px rgba(0, 255, 209, 0.3) !important;
+            }
+
             .team-card { flex-direction: column; align-items: center; gap: 32px; padding: 40px 24px; text-align: center; }
             .team-skills { justify-content: center; }
             .contact-wrap { padding: 44px 24px; }
@@ -608,6 +647,16 @@
             .stat-item:last-child { border-bottom: none; }
             .projects-grid { grid-template-columns: 1fr; }
             .terminal-body { font-size: 0.78rem; padding: 18px 18px 20px; }
+        }
+
+        @keyframes shimmerSweep {
+            0% { transform: translate(-30%, -30%) rotate(30deg); }
+            50%, 100% { transform: translate(30%, 30%) rotate(30deg); }
+        }
+
+        @keyframes mobileIconFloat {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-6px) rotate(3deg); }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -858,19 +907,21 @@
                 ctx.fill();
             });
 
-            // Particle Connections
-            for(let i = 0; i < particles.length; i++){
-                for(let j = i + 1; j < particles.length; j++){
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if(dist < 110){
-                        ctx.beginPath();
-                        ctx.strokeStyle = 'rgba(0, 255, 209, ' + (0.06 * (1 - dist / 110)) + ')';
-                        ctx.lineWidth = 0.6;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
+            // Particle Connections (Only execute on Desktop screens > 768px for mobile battery optimization)
+            if (W > 768) {
+                for(let i = 0; i < particles.length; i++){
+                    for(let j = i + 1; j < particles.length; j++){
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if(dist < 110){
+                            ctx.beginPath();
+                            ctx.strokeStyle = 'rgba(0, 255, 209, ' + (0.06 * (1 - dist / 110)) + ')';
+                            ctx.lineWidth = 0.6;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
                     }
                 }
             }
