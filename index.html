@@ -21,8 +21,8 @@
 
         :root {
             --bg:          #020208;
-            --bg-card:     rgba(12, 14, 32, 0.25);
-            --bg-card-hover: rgba(22, 28, 60, 0.38);
+            --bg-card:     rgba(12, 14, 32, 0.22);
+            --bg-card-hover: rgba(22, 28, 60, 0.35);
             --glass-border: rgba(255, 255, 255, 0.12);
             --glass-border-top: rgba(255, 255, 255, 0.28);
             --glass-glow:  rgba(0, 255, 209, 0.18);
@@ -225,15 +225,9 @@
             border: 1px solid rgba(255, 255, 255, 0.25);
             box-shadow: 0 25px 60px rgba(0,0,0,0.7), 0 0 50px rgba(0,255,209,0.3);
             transition: transform 0.6s var(--spring-bounce);
-            animation: floatLogo 5s ease-in-out infinite alternate;
         }
         .hero-logo-wrap:hover .hero-logo {
             transform: scale(1.1) rotate(4deg);
-        }
-
-        @keyframes floatLogo {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-10px); }
         }
 
         .hero-title {
@@ -273,7 +267,7 @@
         /* ── APPLE MAC TERMINAL (LIQUID GLASS ENHANCED) ── */
         .terminal {
             position: relative;
-            background: linear-gradient(135deg, rgba(12, 14, 35, 0.45) 0%, rgba(5, 6, 18, 0.6) 100%);
+            background: linear-gradient(135deg, rgba(12, 14, 35, 0.35) 0%, rgba(5, 6, 18, 0.5) 100%);
             backdrop-filter: blur(32px) saturate(220%);
             -webkit-backdrop-filter: blur(32px) saturate(220%);
             border: 1px solid var(--glass-border);
@@ -414,7 +408,7 @@
         /* ── STATS BAR (LIQUID LIQUID) ── */
         .stats-bar {
             position: relative; z-index: 1;
-            background: linear-gradient(90deg, rgba(10, 10, 26, 0.4) 0%, rgba(18, 20, 48, 0.5) 50%, rgba(10, 10, 26, 0.4) 100%);
+            background: linear-gradient(90deg, rgba(10, 10, 26, 0.3) 0%, rgba(18, 20, 48, 0.4) 50%, rgba(10, 10, 26, 0.3) 100%);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border-top: 1px solid var(--glass-border-top);
@@ -653,48 +647,14 @@
         .reveal-delay-2 { transition-delay: 0.24s; }
         .reveal-delay-3 { transition-delay: 0.36s; }
 
-        /* ── DYNAMIC MOBILE ANIMATIONS & ULTRA LIQUID GLASS ── */
+        /* ── RESPONSIVE & MOBILE CLEAN LIQUID GLASS LAYOUT ── */
         @media (max-width: 768px) {
             section { padding: 80px 20px; }
             .hero { padding-top: 100px; }
-            
-            /* Enhanced liquid glass for mobile GPUs */
-            .glass-card {
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%), rgba(10, 12, 28, 0.28);
-                backdrop-filter: blur(16px) saturate(180%);
-                -webkit-backdrop-filter: blur(16px) saturate(180%);
-                border-color: rgba(255, 255, 255, 0.16);
-                border-top-color: rgba(255, 255, 255, 0.35);
-            }
-
-            /* Liquid Shimmer Light Wave Animation for Mobile Cards */
-            .glass-card::after {
-                content: '';
-                position: absolute;
-                top: -60%; left: -60%;
-                width: 220%; height: 220%;
-                background: linear-gradient(
-                    45deg,
-                    transparent 42%,
-                    rgba(0, 255, 209, 0.12) 50%,
-                    rgba(139, 61, 255, 0.08) 54%,
-                    transparent 60%
-                );
-                transform: rotate(30deg);
-                animation: liquidShimmerWave 5s infinite ease-in-out;
-                pointer-events: none;
-            }
-
-            /* Fluid floating animations for mobile UI elements */
-            .proj-icon {
-                animation: mobileFluidFloat 3.8s ease-in-out infinite alternate;
-            }
-            .projects-grid .glass-card:nth-child(2) .proj-icon { animation-delay: -1.2s; }
-            .projects-grid .glass-card:nth-child(3) .proj-icon { animation-delay: -2.4s; }
 
             /* Touch liquid press effect */
             .glass-btn:active, .glass-card:active {
-                transform: scale(0.96) !important;
+                transform: scale(0.97) !important;
                 border-color: var(--cyan) !important;
                 box-shadow: 0 0 25px rgba(0, 255, 209, 0.35) !important;
             }
@@ -708,16 +668,6 @@
             .stat-item:last-child { border-bottom: none; }
             .projects-grid { grid-template-columns: 1fr; }
             .terminal-body { font-size: 0.78rem; padding: 18px 18px 20px; }
-        }
-
-        @keyframes liquidShimmerWave {
-            0% { transform: translate(-35%, -35%) rotate(30deg); }
-            60%, 100% { transform: translate(35%, 35%) rotate(30deg); }
-        }
-
-        @keyframes mobileFluidFloat {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(-7px) rotate(4deg); }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1154,6 +1104,7 @@
             'txt-stat-users':     'Active Users',
             'txt-stat-apps':      'Released Apps',
             'txt-stat-year':      'Founded',
+            'txt-ordino-tag':     'Finance · Management',
             'txt-ordino-tag':     'Finance · Management',
             'txt-ordino-name':    'Ordino',
             'txt-ordino-desc':    'Professional order and invoice management tool for online stores with smart profit reporting and a modern UI.',
