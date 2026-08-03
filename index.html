@@ -63,25 +63,29 @@
             direction: ltr;
         }
 
-        /* ── HARDWARE-ACCELERATED AMBIENT LIGHT ORBS ── */
+        /* ── HARDWARE-ACCELERATED AMBIENT LIGHT ORBS & CSS GRID ── */
         #bg-canvas {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 0;
             pointer-events: none;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 90px 90px;
         }
 
         .ambient-orb {
             position: fixed;
-            filter: blur(60px);
-            -webkit-filter: blur(60px);
+            filter: blur(50px);
+            -webkit-filter: blur(50px);
             pointer-events: none;
             z-index: 0;
-            opacity: 0.65;
+            opacity: 0.55;
             transform: translateZ(0);
             will-change: transform;
-            animation: liquidMorph 20s linear infinite alternate;
+            animation: liquidMorph 22s linear infinite alternate;
         }
         .orb-1 {
             top: -10%; left: -10%;
@@ -107,7 +111,6 @@
             animation-duration: 26s;
         }
 
-        /* GPU-Compositor Only Animation (No CPU Layout recalculation) */
         @keyframes liquidMorph {
             0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
             50% { transform: translate3d(30px, 45px, 0) scale(1.08) rotate(90deg); }
@@ -253,7 +256,7 @@
         }
         body.en .hero-title .word-razan { font-family: var(--mono); letter-spacing: 8px; text-transform: uppercase; }
 
-        /* ── APPLE MAC TERMINAL (HIGH PERFORMANCE LIQUID GLASS) ── */
+        /* ── APPLE MAC TERMINAL ── */
         .terminal {
             position: relative;
             background: linear-gradient(135deg, rgba(12, 14, 35, 0.45) 0%, rgba(5, 6, 18, 0.6) 100%);
@@ -365,7 +368,9 @@
             position: relative;
             z-index: 1;
             padding: 110px 24px;
-            contain: content; /* Isolates layout rendering for maximum FPS */
+            contain: content;
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 600px;
         }
         .container { max-width: 1140px; margin: 0 auto; }
 
@@ -515,7 +520,6 @@
         .proj-desc { font-size: 0.92rem; color: #a0aec0; line-height: 1.75; flex: 1; margin-bottom: 24px; }
         body.en .proj-desc { font-family: var(--mono); font-size: 0.85rem; }
 
-        /* TECH BADGE */
         .tech-badge {
             display: inline-flex;
             align-items: center;
@@ -609,7 +613,7 @@
         body.en .footer-inner { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 1px; }
         .footer-inner .highlight { color: var(--cyan); font-weight: 600; }
 
-        /* ── OPTIMIZED REVEAL ANIMATIONS ── */
+        /* ── REVEAL ANIMATIONS ── */
         @keyframes heroFade {
             from { opacity: 0; transform: translateY(25px); }
             to { opacity: 1; transform: translateY(0); }
@@ -629,22 +633,20 @@
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
 
-        /* ── LOW-SPEC FRIENDLY MOBILE BREAKPOINTS ── */
+        /* ── MOBILE BREAKPOINTS ── */
         @media (max-width: 768px) {
             section { padding: 80px 20px; }
             .hero { padding-top: 100px; }
 
-            /* Optimized Glass backdrop blur for Mobile GPUs */
             .glass-card, .terminal, .glass-btn, .hero-badge {
                 backdrop-filter: blur(10px);
                 -webkit-backdrop-filter: blur(10px);
             }
 
-            /* Lightweight vibrant background blur for mobile CPUs */
             .ambient-orb {
-                filter: blur(40px);
-                -webkit-filter: blur(40px);
-                opacity: 0.85;
+                filter: blur(35px);
+                -webkit-filter: blur(35px);
+                opacity: 0.75;
             }
             .orb-1 {
                 width: 90vw; height: 90vw;
@@ -663,7 +665,6 @@
                 opacity: 0.65;
             }
 
-            /* Fast touch feedback */
             .glass-btn:active, .glass-card:active {
                 transform: scale(0.98) !important;
                 border-color: var(--cyan) !important;
@@ -700,7 +701,7 @@
         <span id="txt-badge">بیش از ۲ میلیون کاربر فعال</span>
     </div>
     <div class="hero-logo-wrap">
-        <img src="LogoTxt.png" alt="Razan Games Logo" class="hero-logo">
+        <img src="LogoTxt.png" alt="Razan Games Logo" class="hero-logo" fetchpriority="high" decoding="async">
     </div>
     <h1 class="hero-title">
         <span class="word-razan" id="txt-razan">رازان</span>
@@ -742,7 +743,7 @@
         </div>
         <div class="glass-card team-card reveal reveal-delay-1">
             <div class="team-avatar-wrap">
-                <img src="isaac.jpeg" alt="Isaac Alizadeh" class="team-avatar">
+                <img src="isaac.jpeg" alt="Isaac Alizadeh" class="team-avatar" loading="lazy" decoding="async">
                 <div class="avatar-ring"></div>
             </div>
             <div>
@@ -776,7 +777,7 @@
 
             <div class="glass-card proj-card reveal reveal-delay-1">
                 <div class="proj-header">
-                    <img src="rdns.png" alt="RDNS Gaming" class="proj-icon">
+                    <img src="rdns.png" alt="RDNS Gaming" class="proj-icon" loading="lazy" decoding="async">
                     <div>
                         <div class="proj-tag" id="txt-rdns-tag">DNS · VPN · گیمینگ</div>
                         <div class="proj-name">RDNS Gaming</div>
@@ -792,7 +793,7 @@
 
             <div class="glass-card proj-card reveal reveal-delay-2">
                 <div class="proj-header">
-                    <img src="chibe.png" alt="Chi Bepazam" class="proj-icon">
+                    <img src="chibe.png" alt="Chi Bepazam" class="proj-icon" loading="lazy" decoding="async">
                     <div>
                         <div class="proj-tag" id="txt-chi-tag">ابزار · آشپزی</div>
                         <div class="proj-name" id="txt-chi-name">چی بپزم؟</div>
@@ -808,7 +809,7 @@
 
             <div class="glass-card proj-card reveal reveal-delay-3">
                 <div class="proj-header">
-                    <img src="mICON.png" alt="Donut Stack" class="proj-icon">
+                    <img src="mICON.png" alt="Donut Stack" class="proj-icon" loading="lazy" decoding="async">
                     <div>
                         <div class="proj-tag" id="txt-donut-tag">پازل · کژوال</div>
                         <div class="proj-name">Donut Stack</div>
@@ -824,7 +825,7 @@
 
             <div class="glass-card proj-card reveal reveal-delay-1">
                 <div class="proj-header">
-                    <img src="ordino.WEBP" alt="Ordino" class="proj-icon" id="ordino-icon">
+                    <img src="ordino.WEBP" alt="Ordino" class="proj-icon" id="ordino-icon" loading="lazy" decoding="async">
                     <div>
                         <div class="proj-tag" id="txt-ordino-tag">مالی · مدیریت</div>
                         <div class="proj-name" id="txt-ordino-name">اوردینو</div>
@@ -868,35 +869,43 @@
 </footer>
 
 <script>
-    /* ── THROTTLED MOUSE POSITION FOR GLASS REFLECTIONS (PERFORMANCE BOOST) ── */
-    let mouseScheduled = false;
-    document.addEventListener('mousemove', (e) => {
-        if (!mouseScheduled) {
-            mouseScheduled = true;
-            requestAnimationFrame(() => {
-                document.querySelectorAll('.glass-card').forEach(card => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty('--mouse-x', `${x}px`);
-                    card.style.setProperty('--mouse-y', `${y}px`);
+    /* ── THROTTLED MOUSE POSITION FOR GLASS REFLECTIONS (DESKTOP ONLY) ── */
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        let mouseScheduled = false;
+        document.addEventListener('mousemove', (e) => {
+            if (!mouseScheduled) {
+                mouseScheduled = true;
+                requestAnimationFrame(() => {
+                    document.querySelectorAll('.glass-card').forEach(card => {
+                        const rect = card.getBoundingClientRect();
+                        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                    });
+                    mouseScheduled = false;
                 });
-                mouseScheduled = false;
-            });
-        }
-    }, { passive: true });
+            }
+        }, { passive: true });
+    }
 
-    /* ── CANVAS PARTICLES BACKGROUND (OPTIMIZED & AUTO-PAUSE) ── */
+    /* ── CANVAS PARTICLES BACKGROUND (OPTIMIZED & AUTO-PAUSE ON SCROLL) ── */
     (function(){
         const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: true });
         let W, H, particles = [];
         let isPageVisible = true;
+        let isHeroInView = true;
         const COLORS = ['rgba(0,255,209,','rgba(139,61,255,','rgba(255,45,120,'];
 
         document.addEventListener("visibilitychange", () => {
             isPageVisible = !document.hidden;
         });
+
+        const heroEl = document.querySelector('.hero');
+        if (heroEl && 'IntersectionObserver' in window) {
+            new IntersectionObserver((entries) => {
+                isHeroInView = entries[0].isIntersecting;
+            }, { threshold: 0.05 }).observe(heroEl);
+        }
 
         function resize(){ 
             W = canvas.width = window.innerWidth; 
@@ -918,46 +927,39 @@
             this.reset();
         }
 
-        // Lightweight count based on device spec / screen size
         const isMobile = W <= 768;
-        const COUNT = isMobile ? Math.min(25, Math.floor(W * H / 22000)) : Math.min(60, Math.floor(W * H / 18000));
+        const COUNT = isMobile ? 18 : 45;
         for(let i = 0; i < COUNT; i++) particles.push(new Particle());
 
         function draw(){
-            if (!isPageVisible) {
+            if (!isPageVisible || !isHeroInView) {
                 requestAnimationFrame(draw);
                 return;
             }
 
             ctx.clearRect(0, 0, W, H);
-            
-            // Grid lines
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.015)'; 
-            ctx.lineWidth = 1;
-            const G = 90;
-            for(let x = 0; x < W; x += G){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
-            for(let y = 0; y < H; y += G){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
 
-            // Particles
-            particles.forEach(p => {
+            // Particles update
+            for(let i = 0; i < particles.length; i++){
+                const p = particles[i];
                 p.x += p.vx; p.y += p.vy;
                 if(p.x < 0 || p.x > W || p.y < 0 || p.y > H) p.reset();
                 ctx.beginPath(); 
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 ctx.fillStyle = p.color + p.alpha + ')'; 
                 ctx.fill();
-            });
+            }
 
-            // Particle Connections (Only execute on Desktop screens > 768px)
+            // Lines between particles (Desktop only)
             if (!isMobile) {
                 for(let i = 0; i < particles.length; i++){
                     for(let j = i + 1; j < particles.length; j++){
                         const dx = particles[i].x - particles[j].x;
                         const dy = particles[i].y - particles[j].y;
                         const dist = Math.sqrt(dx * dx + dy * dy);
-                        if(dist < 100){
+                        if(dist < 90){
                             ctx.beginPath();
-                            ctx.strokeStyle = 'rgba(0, 255, 209, ' + (0.05 * (1 - dist / 100)) + ')';
+                            ctx.strokeStyle = 'rgba(0, 255, 209, ' + (0.04 * (1 - dist / 90)) + ')';
                             ctx.lineWidth = 0.5;
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
@@ -1155,7 +1157,6 @@
             if(el) el.textContent = t[id];
         });
 
-        // Footer Special
         const fEl = document.getElementById('txt-footer');
         if(fEl){
             fEl.innerHTML = lang === 'fa'
@@ -1163,17 +1164,14 @@
                 : '&copy; 2026 <span class="highlight">RAZAN GAMES STUDIO</span> — ALL RIGHTS RESERVED';
         }
 
-        // Stat Numbers
         document.getElementById('stat-apps').textContent = lang === 'fa' ? '۴' : '4';
         document.getElementById('stat-year').textContent = lang === 'fa' ? '۲۰۱۹' : '2019';
 
-        // Counter Trigger
         statFired = false;
         statEl.textContent = lang === 'fa' ? '۰' : '0';
         animateCounter(statEl, 2000000, lang === 'fa');
         statFired = true;
 
-        // Skills List
         const skillsEl = document.getElementById('txt-skills');
         if(skillsEl){
             skillsEl.innerHTML = lang === 'fa'
@@ -1181,7 +1179,6 @@
                 : '<li>C# | Advanced</li><li>Android Studio | Advanced</li><li>Unity | Advanced</li><li>Android Development | Advanced</li><li>Python | Advanced</li><li>Java | Advanced</li><li>React | Intermediate</li><li>Kotlin | Advanced</li><li>GIT | Advanced</li><li>Html &amp; CSS | Intermediate</li>';
         }
 
-        // Restart Terminal Animation
         if(termAnim) clearTimeout(termAnim);
         buildTerminal(lang);
     }
